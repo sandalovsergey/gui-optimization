@@ -46,10 +46,7 @@ signals :
 private:
     Ui::ParamDialog *ui;
 
-    //QCPColorMap *colorMap;
-
     QString listFunc[2] = {"f(x,y)=(1-x)^2 + 100(y-x^2)^2", "g(x,y)=3x^2 + xy + 2y^2 - x - 4y"};
-    //QString funcChoice = "f(x,y)=(1-x)^2 + 100(y-x^2)^2";
     double leftX = -2.0;
     double rightX = 2.0;
     double leftY = -2.0;

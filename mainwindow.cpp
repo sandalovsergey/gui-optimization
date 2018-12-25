@@ -18,10 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-//    delete startPoint;
-//    delete curPoint;
-//    delete colorMap;
-//    delete dialog;
     delete ui;
 }
 
