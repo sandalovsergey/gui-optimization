@@ -14,6 +14,10 @@ UserMethod::~UserMethod() {
 	criterion = nullptr;
 }
 
+vector<UserPoint> UserMethod::getPathToGoal() {
+    return pathToGoal;
+}
+
 void NelderMeadMethod::start(UserPoint* startPoint) {
     try {
         if (startPoint->getDim() != targetF->getDimension()) {
@@ -203,6 +207,8 @@ void NelderMeadMethod::step() {
 		isRepeat = !criterion->stop(f_l);
 
         printIteration();
+
+        pathToGoal.push_back(simplex[0]);
 	}
 
     cout << "\nExtreme point x* is " << simplex[0] << endl;
@@ -275,6 +281,7 @@ void RandomSearchMethod::step() {
     //srand (static_cast <unsigned> (time(0)));
 
     curApprox = *startPoint;
+    pathToGoal.push_back(curApprox);
     UserPoint y_i(curApprox);
     double p = prob;
     double ksi;
@@ -314,10 +321,14 @@ void RandomSearchMethod::step() {
             }
 
             getIntersec(ballX);
+
+            pathToGoal.push_back(curApprox);
         }
 
         isRepeat = !criterion->stop(min_f);
         printIteration();
+
+
     }
 
     cout << "\nExtreme point x* is " << curApprox << endl;

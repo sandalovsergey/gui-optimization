@@ -34,10 +34,13 @@ public:
 	 */
 	virtual void printIteration() = 0;
 
+    vector<UserPoint> getPathToGoal();
+
 protected:
     UserPoint* startPoint; ///< start point
 	UserFunction* targetF; ///< function to optimize
 	UserCriterion* criterion; ///< optimization criterion
+    vector<UserPoint> pathToGoal = {};
 
 };
 

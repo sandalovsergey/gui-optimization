@@ -92,6 +92,39 @@ string RosenbrockFunction::getFuncFormulae() {
     return getFormulae();
 }
 
+TwoDimensionFunction::TwoDimensionFunction() : UserFunction(2) {
+    domain = new UserDomain(vector<double>{-5, -5}, vector<double>{5, 5});
+}
+
+TwoDimensionFunction::~TwoDimensionFunction() {
+
+}
+
+double TwoDimensionFunction::apply(const UserPoint &point) {
+    try {
+        if (point.isInDomain(*domain)) {
+            vector<double> x = point.getX();
+            return 3*x[0]*x[0] + x[0]*x[1] + 2*x[1]*x[1] - x[0] - 4*x[1];
+        } else {
+           throw DomainException();
+        }
+    }
+
+    catch (DomainException ex) {
+        cout << point << " is not in domain!\n";
+        cout << ex.what() << endl;
+        exit(ex.getErrorCode());
+    }
+}
+
+string TwoDimensionFunction::getFormulae() {
+    return "g(x,y)=3x^2 + xy + 2y^2 - x - 4y";
+}
+
+string TwoDimensionFunction::getFuncFormulae() {
+    return getFormulae();
+}
+
 
 ThreeDimensionFunction::ThreeDimensionFunction() : UserFunction(3) {
     domain = new UserDomain(vector<double>{-10,-10,-10}, vector<double>{10,10,10});
