@@ -6,12 +6,29 @@ std::uniform_real_distribution<> getKsi1(0.0, 1.0);
 
 UserMethod::UserMethod(UserFunction* targetF, UserCriterion* criterion)
 	: targetF(targetF), criterion(criterion) {
+    numOfIter = 0;
 }
 
 UserMethod::~UserMethod() {
 	startPoint = nullptr;
 	targetF = nullptr;
 	criterion = nullptr;
+}
+
+vector<UserPoint> UserMethod::getPathToGoal() {
+    return pathToGoal;
+}
+
+int UserMethod::getNumOfIter() {
+    return numOfIter;
+}
+
+UserPoint* UserMethod::getEndPoint() {
+    return endPoint;
+}
+
+double UserMethod::getFEnd() {
+    return fEnd;
 }
 
 void NelderMeadMethod::start(UserPoint* startPoint) {
@@ -104,10 +121,10 @@ void Sort(vector<UserPoint>& smpl, vector<double>& f)
 }
 
 void NelderMeadMethod::step() {
-	cout << "Start simplex: ";
+/*	cout << "Start simplex: ";
 	for (int i = 0; i < simplex.size(); ++i)
 		cout << simplex[i] << " ";
-	cout << "\n\n" << endl;
+    cout << "\n\n" << endl; */
 
 	int N_DIM = simplex.size() - 1;
 	vector<double> f(N_DIM + 1);
@@ -202,11 +219,17 @@ void NelderMeadMethod::step() {
 		}
 		isRepeat = !criterion->stop(f_l);
 
-        printIteration();
+      //  printIteration();
+
+        pathToGoal.push_back(simplex[0]);
+        ++numOfIter;
 	}
 
-    cout << "\nExtreme point x* is " << simplex[0] << endl;
-    cout << "f(x*) = " << f_l << endl;
+    endPoint = new UserPoint(pathToGoal[pathToGoal.size() - 1]);
+    fEnd = targetF->apply(*endPoint);
+
+ //   cout << "\nExtreme point x* is " << simplex[0] << endl;
+ //   cout << "f(x*) = " << f_l << endl;
 }
 
 string NelderMeadMethod::getMethodName() {
@@ -253,6 +276,7 @@ void RandomSearchMethod::start(UserPoint *startPoint) {
     }
 
     (*this).startPoint = startPoint;
+
 }
 
 void RandomSearchMethod::getIntersec(UserDomain& domain){
@@ -275,6 +299,7 @@ void RandomSearchMethod::step() {
     //srand (static_cast <unsigned> (time(0)));
 
     curApprox = *startPoint;
+    pathToGoal.push_back(curApprox);
     UserPoint y_i(curApprox);
     double p = prob;
     double ksi;
@@ -314,14 +339,22 @@ void RandomSearchMethod::step() {
             }
 
             getIntersec(ballX);
+
+            pathToGoal.push_back(curApprox);
         }
 
         isRepeat = !criterion->stop(min_f);
-        printIteration();
+      //  printIteration();
+        ++numOfIter;
+
+
     }
 
-    cout << "\nExtreme point x* is " << curApprox << endl;
-    cout << "f(x*) = " << min_f << endl;
+  //  cout << "\nExtreme point x* is " << curApprox << endl;
+  //  cout << "f(x*) = " << min_f << endl;
+
+    endPoint = new UserPoint(pathToGoal[pathToGoal.size() - 1]);
+    fEnd = targetF->apply(*endPoint);
 }
 
 string RandomSearchMethod::getMethodName() {

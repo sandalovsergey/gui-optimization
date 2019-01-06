@@ -83,6 +83,19 @@ public:
 };
 
 /**
+ * Class for two dimension function
+ */
+
+class TwoDimensionFunction : public UserFunction {
+public:
+    TwoDimensionFunction();
+    ~TwoDimensionFunction();
+    double apply(const UserPoint &point) override;
+    static string getFormulae();
+    string getFuncFormulae() override;
+};
+
+/**
  * Class for three dimension function
  */
 

@@ -34,10 +34,20 @@ public:
 	 */
 	virtual void printIteration() = 0;
 
+    int getNumOfIter();
+    UserPoint* getEndPoint();
+    double getFEnd();
+
+    vector<UserPoint> getPathToGoal();
+
 protected:
     UserPoint* startPoint; ///< start point
 	UserFunction* targetF; ///< function to optimize
 	UserCriterion* criterion; ///< optimization criterion
+    vector<UserPoint> pathToGoal = {};
+    int numOfIter;
+    UserPoint* endPoint;
+    double fEnd;
 
 };
 
@@ -63,7 +73,7 @@ protected:
 	double alpha; ///< method params
 	double beta; ///< method params
 	double gamma; ///< method params
-	vector<UserPoint> simplex; ///< current simplex of Nelder-MEad method
+    vector<UserPoint> simplex; ///< current simplex of Nelder-Mead method
 
 };
 

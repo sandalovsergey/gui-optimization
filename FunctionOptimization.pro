@@ -25,12 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    ConsoleOptimization.cpp \
     UserCriterion.cpp \
     UserDomain.cpp \
     UserException.cpp \
     UserFunction.cpp \
-    UserMenu.cpp \
     UserMethod.cpp \
     UserPoint.cpp \
     qcustomplot.cpp \
@@ -42,12 +40,11 @@ HEADERS += \
     UserDomain.h \
     UserException.h \
     UserFunction.h \
-    UserMenu.h \
-    UserMethod.h \
     UserPoint.h \
     qcustomplot.h \
     mainwindow.h \
-    paramdialog.h
+    paramdialog.h \
+    UserMethod.h
 
 FORMS += \
         mainwindow.ui \
