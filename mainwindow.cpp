@@ -134,6 +134,8 @@ void MainWindow::clickedGraph(QMouseEvent *event)
     drawPath(qPoint.x(), qPoint.y());
 
     startPoint->addData(startX, startY);
+
+    printInformation();
     
     ui->customPlot->replot();
 }
@@ -159,6 +161,22 @@ void MainWindow::drawPath(int pxlX, int pxlY) {
 
     endPoint->addData(pathToGoal[pathToGoal.size() - 1].getX()[0],
             pathToGoal[pathToGoal.size() - 1].getX()[1]);
+}
+
+void MainWindow::printInformation() {
+    QString text1 = "Num of iteration: ";
+    text1.append(QString("%1").arg(method->getNumOfIter()));
+
+    QString text2 = "x*: ";
+    QString qstr = QString::fromStdString(method->getEndPoint()->toString());
+    text2+=qstr;
+
+    QString text3 = "f(x*): ";
+    text3.append(QString("%1").arg(method->getFEnd()));
+
+    ui->informLabel1->setText(text1);
+    ui->informLabel2->setText(text2);
+    ui->informLabel3->setText(text3);
 }
 
 

@@ -97,6 +97,7 @@ void ParamDialog::initMembers(UserFunction **f, UserDomain **domain,
 
 
 
+
 void ParamDialog::on_numOfIter_clicked()
 {
     ui->num->setEnabled(true);

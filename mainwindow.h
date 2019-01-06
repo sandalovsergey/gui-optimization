@@ -44,6 +44,7 @@ private:
     UserMethod* method = nullptr;
     
     void drawPath(int pxlX, int pxlY);
+    void printInformation();
 };
 
 #endif // MAINWINDOW_H

@@ -27,6 +27,8 @@ public:
                      UserCriterion** criterion, UserMethod** method);
 
 
+
+
 private slots:
     void on_numOfIter_clicked();
 
